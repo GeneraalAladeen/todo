@@ -13,8 +13,14 @@ export const useStyles = makeStyles((theme) => ({
         backgroundPosition:"top center",
         backgroundSize:"contain",
         backgroundRepeat:"no-repeat",
+        backgroundImage: ({bg }) => `url(${bg})`,
         alignItems:"center",
         justifyContent:"center",
+        padding:theme.spacing(1),
+        [theme.breakpoints.down("sm")]:{
+        backgroundImage: ({ bgMobile }) => `url(${bgMobile})`,
+            
+        }
     },
     clear:{
         "&:hover":{
@@ -26,19 +32,30 @@ export const useStyles = makeStyles((theme) => ({
         display:"flex",
         justifyContent:"space-between",
         alignItems:"center",
-        padding:theme.spacing(1)
+        height:"50px",
+        padding:theme.spacing(1),
+        "& h1":{
+            color:"#fff"
+        },
+        [theme.breakpoints.down("sm")]:{
+            padding:theme.spacing(.5),
+        }
     },
     todoSection:{
-        width:"400px",
+        width:"500px",
+        flex: "1 1 0",
         height:"60%",
         display:'flex',
         flexDirection:"column",
         gap:theme.spacing(2),
         "& p":{
             fontSize:"12px",
-            color:"#9fa1ba",
-
+            color: ({theme}) => theme ? "#616266" :"#9fa1ba" ,
+        },
+        [theme.breakpoints.down("sm")]:{
+            width:"360px"
         }
+
     },
     bottomSection:{
         display:"flex",
@@ -53,7 +70,6 @@ export const useStyles = makeStyles((theme) => ({
         fontSize:"12px"
     },
     todoListSection:{
-        margin:0,
         borderTopLeftRadius:"8px",
         borderTopRightRadius:"8px",
         boxShadow: ({theme}) => theme ? "1px 20px 30px 4px #ccc" : "none",

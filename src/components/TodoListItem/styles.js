@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     body:{
         width:"70%",
         textAlign:"start",
+        color: ({theme}) => theme ? "#9fa1ba" : "#616266",
         textDecoration: ({complete}) => complete ? 'line-through' : "none"
     },
     container:{
@@ -21,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
       border:"1px solid #36384d",
       height:"25px",
       width:"25px",
+      background: ({complete}) => complete ? "linear-gradient(to right, #3483eb,  #ed32de 100%)" : "none" ,
       backgroundSize:"cover",
       padding:theme.spacing(0.5),
       "&:hover":{
@@ -28,7 +30,11 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     delete:{
-      visibility: ({show}) => show ? "visible" : "hidden",
+      visibility: ({show , editable }) => (show && !editable) ? "visible" : "hidden",
+    },
+    input:{
+      color: ({theme}) => theme ? "#5a586e" : "#9fa1ba",
+      width: 250,
     }
 
 }));

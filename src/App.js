@@ -1,5 +1,7 @@
 import bgDark from './assets/images/bg-desktop-dark.jpg';
+import bgMobileDark from './assets/images/bg-mobile-dark.jpg';
 import bgLight from './assets/images/bg-desktop-light.jpg';
+import bgMobileLight from './assets/images/bg-mobile-light.jpg';
 import iconLight from './assets/images/icon-moon.svg';
 import iconDark from './assets/images/icon-sun.svg';
 import './App.css';
@@ -56,18 +58,23 @@ const reorder = (list, startIndex, endIndex) => {
 
 function App() {
   const { theme } = useContext(AppContext)
-  const classes = useStyles({theme})
+  const bg = theme ? bgDark : bgLight;
+  const bgMobile = theme ? bgMobileDark : bgMobileLight;
+  const classes = useStyles({theme ,bg ,bgMobile })
   const [ todo , setTodo ] = useState(mock)
   const [ filter , setFilter ] = useState("All")
   const [ filteredTodos , setFilteredTodos ] = useState(todo)
   const { toggleTheme } = useContext(AppContext)
+  const [ newTodo , setNewTodo ] = useState("")
 
   const filtersArray  = ["All" , "Active" , "Completed"];
 
+  const handleInputChange = (e) => {
+      setNewTodo(e.target.value)
+  }
+
   const onDragEnd = (result) =>  {
-    if (!result.destination) {
-      return;
-    }
+    if (!result.destination) return
 
     const items = reorder(
       filteredTodos,
@@ -89,6 +96,18 @@ function App() {
      setFilteredTodos(filteredData)
   }
 
+  const createTodo = () => {
+    const newTodos = [...todo];
+    newTodos.unshift({
+      id:todo.length + 1,
+      content: newTodo,
+      complete: false,
+    })
+
+    setTodo(newTodos)
+    setFilteredTodos(newTodos)
+  }
+
   const removeTodo = (id) => {
     const updatedArray = todo.filter((item) => item.id !== id);
     setTodo(updatedArray)
@@ -96,7 +115,6 @@ function App() {
   }
 
   const updateTodo = (id) => {
-
     const updatedArray = todo.map((todo) => {
       if (id === todo.id) {
         todo.complete = !todo.complete;
@@ -120,16 +138,18 @@ function App() {
     setFilteredTodos(filteredTodos)
   }
 
+
+
   return (
     <div className="App">
-      <div className={classes.container} style={{backgroundImage:`url(${theme ? bgDark : bgLight})` }}>
+      <div className={classes.container} >
         <div className={classes.todoSection}>
           <div className={classes.todoTitle}>
-            <h2>TODO</h2>
-            <img src={theme  ? iconDark : iconLight} alt="moon logo" onClick={() => toggleTheme()}/>
+            <h1>TODO</h1>
+            <img src={theme  ?  iconLight : iconDark } alt="moon logo" onClick={() => toggleTheme()}/>
           </div>
 
-          <TodoListItem body="ndjciojmpijmpi" editable /> 
+          <TodoListItem error={true} body="ndjciojmpijmpi" onChange={handleInputChange} editable addTodo={createTodo}/> 
 
           <div>
               <DragDropContext onDragEnd={onDragEnd}>
