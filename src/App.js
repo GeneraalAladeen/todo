@@ -14,11 +14,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {v4 as uuidv4} from 'uuid';
 
 const mock = [
-    {
-      id:uuidv4(),
-      content: "Item 1",
-      complete: false
-    },
+
 ]
 
 
@@ -29,6 +25,10 @@ const reorder = (list, startIndex, endIndex) => {
 
   return result;
 };
+
+const getListStyle = (isDraggingOver, theme) => ({
+  background: (theme && isDraggingOver) && "lightblue" 
+});
 
 
 function App() {
@@ -138,6 +138,7 @@ function App() {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
+                      style={getListStyle(snapshot.isDraggingOver , theme)}
                       className={classes.todoListSection}
                     >
                       {filteredTodos.map(({id , content , complete}, index) => (

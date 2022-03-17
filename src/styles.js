@@ -75,7 +75,8 @@ export const useStyles = makeStyles((theme) => ({
     todoListSection:{
         borderTopLeftRadius:"8px",
         borderTopRightRadius:"8px",
-        boxShadow: ({theme}) => theme ? "1px 20px 30px 4px #ccc" : "none",
+        backgroundColor:({theme}) => theme ? "#fff" : "#181824",
+        boxShadow: ({theme}) => theme ? "1px 20px 30px 4px #ccc" : "1px 20px 30px 4px #001",
         height:"300px",
         overflowY:"scroll",
         "&::-webkit-scrollbar":{

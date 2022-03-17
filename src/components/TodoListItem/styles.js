@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     body:{
         minWidth:"80%",
         textAlign:"start",
+        opacity: ({complete}) => complete ? 0.5 : 1,
         color: ({theme}) => theme ? "#9fa1ba" : "#616266",
         textDecoration: ({complete}) => complete ? 'line-through' : "none"
     },
@@ -23,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     checkBox:{
       borderRadius:"50%",
-      border:"1px solid #36384d",
+      border:  ({theme}) => `1px solid ${theme ? "#ccc" : '#36384d' }`,
       height:"15px",
       width:"15px",
       display:"flex",
