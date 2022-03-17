@@ -25,7 +25,7 @@ const TodoListItem = ({ body , complete , editable = false , deleteTodo , error 
                 </p>
             }
             {
-                editable ? <p onClick={addTodo}>Add</p> :
+                editable ? <p className={classes.add} onClick={addTodo}>Add</p> :
             <img src={cross} height="20px" alt="delete" className={classes.delete} onClick={deleteTodo} />  
             }
         </div>

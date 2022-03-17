@@ -101,7 +101,7 @@ function App() {
       }
       return todo;
     })
-    setFilteredTodos(updatedArray)
+    filterTodo(filter , updatedArray)
     setTodo(updatedArray)
     
   }
@@ -126,7 +126,7 @@ function App() {
         <div className={classes.todoSection}>
           <div className={classes.todoTitle}>
             <h1>TODO</h1>
-            <img src={theme  ?  iconLight : iconDark } alt="moon logo" onClick={() => toggleTheme()}/>
+            <img className={classes.themeIcon} src={theme  ?  iconLight : iconDark } alt="moon logo" onClick={() => toggleTheme()}/>
           </div>
 
           <TodoListItem error={true} body="ndjciojmpijmpi" onChange={handleInputChange} editable addTodo={createTodo}/> 
@@ -167,7 +167,7 @@ function App() {
                 <div className={classes.filter}>
                   {
                     filtersArray.map((item) => <p className={classes.filterOptions} style={{
-                      color: filter === item && "#0a2d85",
+                      color: filter === item && "#4074e1",
                     }} onClick={() => filterTodo(item , filteredTodos)}>{item}</p>)
                   }
                 </div>

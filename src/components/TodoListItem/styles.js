@@ -1,8 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
+    add:{
+        cursor:"pointer"
+    },
     body:{
-        flex : "1 1 0",
+        minWidth:"80%",
         textAlign:"start",
         color: ({theme}) => theme ? "#9fa1ba" : "#616266",
         textDecoration: ({complete}) => complete ? 'line-through' : "none"
@@ -14,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
         gap:theme.spacing(1),
         alignItems:"center",
         justifyContent:"space-between",
-        borderBottom: `1px solid ${theme ? "#36384d" : "#ebeaee"}`,
+        borderBottom: `0.5px solid ${theme ? "#36384d" : "#e6e5ea"}`,
         color: ({theme}) => theme ? "#5a586e" : "#9fa1ba",
         backgroundColor: ({theme}) => theme ? "#fff" : "#25273c",
     },
@@ -30,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundSize:"cover",
       padding:theme.spacing(0.5),
       "&:hover":{
-        border:"1px solid #ebeaee"
+        border:({editable}) => !editable && "1px solid #ebeaee"
       }
     },
     delete:{
