@@ -15,7 +15,7 @@ const TodoListItem = ({ body , complete , editable = false , deleteTodo , error 
         <div ref={todoRef} className={classes.container} {...props} onMouseLeave={() => setShow(false)} onMouseOver={() =>setShow(true)}>
             <div className={classes.checkBox} onClick={updateTodo}>
                 {
-                    complete && <img src={check}  alt="delete"  />
+                    complete && <img src={check} height="8px" alt="check"  />
                 }
             </div>
             {

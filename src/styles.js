@@ -51,17 +51,17 @@ export const useStyles = makeStyles((theme) => ({
         "& p":{
             fontSize:"12px",
             color: ({theme}) => theme ? "#616266" :"#9fa1ba" ,
+            
         },
         [theme.breakpoints.down("sm")]:{
             width:"360px"
         }
-
     },
     bottomSection:{
         display:"flex",
         borderBottomLeftRadius:"8px",
         borderBottomRightRadius:"8px",
-        padding: theme.spacing(2),
+        padding: theme.spacing(1 , 2),
         gap:theme.spacing(1),
         justifyContent:"space-between",
         color:"#9fa1ba",
@@ -82,12 +82,27 @@ export const useStyles = makeStyles((theme) => ({
     },
     filter:{
         display:"flex",
-        gap:theme.spacing(1)
+        gap:theme.spacing(1),
+        [theme.breakpoints.down("sm")]:{
+            display:"none"
+        }
     },
     filterOptions:{
         "&:hover":{
             color:"#fff",
             cursor:"pointer"
+        },
+    },
+    mobileFilter:{
+        display:"none",
+        color:"#9fa1ba",
+        borderRadius:"8px",
+        backgroundColor: ({theme}) => theme ? "#fff" : "#25273c",
+        padding: theme.spacing(1),
+        [theme.breakpoints.down("sm")]:{
+            display:"flex",
+            justifyContent:"center",
+            gap: theme.spacing(2)
         }
     }
 

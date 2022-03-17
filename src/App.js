@@ -11,37 +11,13 @@ import { useContext } from 'react';
 import { AppContext } from './context/appContext';
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {v4 as uuidv4} from 'uuid';
 
 const mock = [
     {
-      id:1,
+      id:uuidv4(),
       content: "Item 1",
       complete: false
-    },
-    {
-      id:2,
-      content: "Item 2",
-      complete: true
-    },
-    {
-      id:3,
-      content: "Item 3",
-      complete: false
-    },
-    {
-      id:4,
-      content: "Item 4",
-      complete: true
-    },
-    {
-      id:5,
-      content: "Item 5",
-      complete: true
-    },
-    {
-      id:6,
-      content: "Item 6",
-      complete: true
     },
 ]
 
@@ -55,7 +31,6 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 
-
 function App() {
   const { theme } = useContext(AppContext)
   const bg = theme ? bgDark : bgLight;
@@ -66,6 +41,7 @@ function App() {
   const [ filteredTodos , setFilteredTodos ] = useState(todo)
   const { toggleTheme } = useContext(AppContext)
   const [ newTodo , setNewTodo ] = useState("")
+
 
   const filtersArray  = ["All" , "Active" , "Completed"];
 
@@ -96,16 +72,20 @@ function App() {
      setFilteredTodos(filteredData)
   }
 
+
+
   const createTodo = () => {
-    const newTodos = [...todo];
-    newTodos.unshift({
-      id:todo.length + 1,
+    if(newTodo === "") return alert("you really want your todo to be nothing, lol")
+
+    const todoArray = [...todo];
+    todoArray.unshift({
+      id:uuidv4(),
       content: newTodo,
       complete: false,
     })
 
-    setTodo(newTodos)
-    setFilteredTodos(newTodos)
+    setTodo(todoArray)
+    setFilteredTodos(todoArray)
   }
 
   const removeTodo = (id) => {
@@ -161,7 +141,7 @@ function App() {
                       className={classes.todoListSection}
                     >
                       {filteredTodos.map(({id , content , complete}, index) => (
-                        <Draggable key={id} draggableId={content} index={index}>
+                        <Draggable key={id} draggableId={`${id}`} index={index}>
                           {(provided, snapshot) => (
       
                             <TodoListItem  
@@ -188,13 +168,20 @@ function App() {
                   {
                     filtersArray.map((item) => <p className={classes.filterOptions} style={{
                       color: filter === item && "#0a2d85",
-
                     }} onClick={() => filterTodo(item , filteredTodos)}>{item}</p>)
                   }
                 </div>
                 <p onClick={clearCompletedTodos} className={classes.clear}>Clear completed</p>
               </div>
-          </div>    
+          </div>   
+
+          <div className={classes.mobileFilter}>
+                  {
+                    filtersArray.map((item) => <p className={classes.filterOptions} style={{
+                      color: filter === item && "#0a2d85",
+                    }} onClick={() => filterTodo(item , filteredTodos)}>{item}</p>)
+                  }
+          </div> 
           <p>Drag and Drop to reorder list</p>
         </div>
       </div>
