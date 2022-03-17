@@ -5,7 +5,7 @@ import { useStyles } from './styles'
 import cross from '../../assets/images/icon-cross.svg'
 import check from '../../assets/images/icon-check.svg'
 
-const TodoListItem = ({ body , complete , editable = false , deleteTodo , error = false ,  onChange , addTodo, updateTodo ,   todoRef, ...props}) => {
+const TodoListItem = ({ body , value, complete , editable = false , deleteTodo , error = false ,  onChange , addTodo, updateTodo ,   todoRef, ...props}) => {
     const { theme } = useContext(AppContext)
     const [ show , setShow ] = useState(false)
     const classes = useStyles({theme , complete , show , editable})
@@ -19,7 +19,7 @@ const TodoListItem = ({ body , complete , editable = false , deleteTodo , error 
                 }
             </div>
             {
-                editable ? <InputBase placeholder='Create new todo...' name="todo" onChange={onChange} className={classes.input}/> :
+                editable ? <InputBase value={value} placeholder='Create new todo...' name="todo" onChange={onChange} className={classes.input}/> :
                 <p className={classes.body} >
                     {body}
                 </p>

@@ -83,7 +83,7 @@ function App() {
       content: newTodo,
       complete: false,
     })
-
+    setNewTodo("")
     setTodo(todoArray)
     setFilteredTodos(todoArray)
   }
@@ -128,8 +128,8 @@ function App() {
             <h1>TODO</h1>
             <img className={classes.themeIcon} src={theme  ?  iconLight : iconDark } alt="moon logo" onClick={() => toggleTheme()}/>
           </div>
-
-          <TodoListItem error={true} body="ndjciojmpijmpi" onChange={handleInputChange} editable addTodo={createTodo}/> 
+    
+          <TodoListItem error={true} body="ndjciojmpijmpi" onChange={handleInputChange} value={newTodo} editable addTodo={createTodo}/> 
 
           <div>
               <DragDropContext onDragEnd={onDragEnd}>

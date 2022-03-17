@@ -42,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     input:{
       color: ({theme}) => theme ? "#5a586e" : "#9fa1ba",
-      width: 250,
+      width: "80%",
     }
 
 }));
